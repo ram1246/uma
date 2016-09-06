@@ -1,0 +1,41 @@
+{
+  "name": "uma.ui",
+  "version": "0.0.1",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test"
+  ],
+  "description": "uma",
+  "dependencies": {
+    "angular": "^1.5.0",
+    "angular-ui-router": "~0.2.10",
+    "jquery": "^1.11.3",
+    "angular-bootstrap": "^1.2.4",
+    "bootstrap": "~3.3.6",
+    "datatables": "~1.10.4",
+    "font-awesome": "^4.6.3",
+    "bootstrap-social": "~4.8.0",
+    "angular-resource": "~1.2.16",
+    "lodash": "~4.6.1",
+    "ng-idle": "^1.2.0",
+    "angular-animate": "^1.5.0",
+    "angular-translate": "^2.10.0",
+    "angular-translate-loader-partial": "^2.10.0",
+    "angular-utils-ui-breadcrumbs": "^0.2.2",
+    "angular-tree-control": "^0.2.23",
+    "json3": "~3.2.4",
+    "bootstrap-sass": "~3.3.4",
+    "es5-shim": "~2.0.8",
+    "angular-cookies": "~1.0.7",
+    "angular-strap": "~0.7.5",
+    "angular-ui": "~0.4.0",
+    "angular-inform": "^0.0.18"
+  },
+  "resolutions": {
+    "angular": "^1.5.0",
+    "jquery": ">= 1.8.0",
+    "font-awesome": "^4.6.3"
+  }
+}
