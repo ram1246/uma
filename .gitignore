@@ -1,6 +1,6 @@
 
 node_modules
-
+bower_components
 /obj/Debug
 /.vs/config/applicationhost.config
 .suo

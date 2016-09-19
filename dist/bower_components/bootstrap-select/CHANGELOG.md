@@ -1,3 +1,23 @@
+### v1.11.2 (2016-09-09)
+
+#### Bug Fixes
+* fix sourceMappingURL in bootstrap-select.min.js
+
+-------------------
+
+### v1.11.1 (2016-09-09)
+
+#### Bug Fixes
+* [#1475]: fix Cannot read property 'apply' of null error
+* [#1484]: Change events fire twice on IE8
+* [#1489]: hide.bs.select and hidden.bs.select events not fired when "Esc" key pressed with live search enabled
+
+[#1475]: https://github.com/silviomoreto/bootstrap-select/issues/1475
+[#1484]: https://github.com/silviomoreto/bootstrap-select/issues/1484
+[#1489]: https://github.com/silviomoreto/bootstrap-select/issues/1489
+
+-------------------
+
 ### v1.11.0 (2016-08-16)
 
 #### Bug Fixes
@@ -17,7 +37,7 @@
 #### New Features
 * [#1139]: add placeholder styling via `bs-placeholder` class
 * [#1290]: auto close the menu if maxOptions is set to 1 (instead of leaving open)
-* [#1127], #1016, #1160, #1269: add 'auto' option for dropdownAlignRight
+* [#1127], [#1016], [#1160], [#1269]: add 'auto' option for dropdownAlignRight
 * [58ed408]: support using a string for maxOptionsText
 * [#541]: ARIA - Accessibility
 
@@ -37,6 +57,9 @@
 [#1139]: https://github.com/silviomoreto/bootstrap-select/issues/1139
 [#1290]: https://github.com/silviomoreto/bootstrap-select/issues/1290
 [#1127]: https://github.com/silviomoreto/bootstrap-select/issues/1127
+[#1016]: https://github.com/silviomoreto/bootstrap-select/issues/1016
+[#1160]: https://github.com/silviomoreto/bootstrap-select/issues/1160
+[#1269]: https://github.com/silviomoreto/bootstrap-select/issues/1269
 [58ed408]: https://github.com/silviomoreto/bootstrap-select/commit/58ed4085019526141be07beeada37788dfe2d316
 [#541]: https://github.com/silviomoreto/bootstrap-select/issues/541
 

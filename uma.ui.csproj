@@ -31,11 +31,34 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="app\src\app.js" />
+    <Content Include="app\src\config\config.js" />
+    <Content Include="app\src\libs\angular-busy.js" />
+    <Content Include="app\src\login\authenticationService.js" />
+    <Content Include="app\src\login\forgotPasswordController.js" />
+    <Content Include="app\src\login\loginConstant.js" />
+    <Content Include="app\src\login\loginController.js" />
+    <Content Include="app\src\login\parentController.js" />
+    <Content Include="app\src\login\registrationController.js" />
+    <Content Include="app\src\pages\about.html" />
+    <Content Include="app\src\pages\contactus.html" />
+    <Content Include="app\src\pages\home.html" />
+    <Content Include="app\src\pages\index.html" />
+    <Content Include="app\src\pages\initiatives.html" />
+    <Content Include="app\src\pages\intro.html" />
+    <Content Include="app\src\pages\login.html" />
+    <Content Include="app\src\pages\pastevents.html" />
+    <Content Include="app\src\pages\registration.html" />
+    <Content Include="app\src\pages\upcomingevents.html" />
+    <Content Include="app\src\services\validatorService.js" />
     <Content Include="app\src\umaMain.js" />
     <Content Include="app\src\routes.js" />
+    <Content Include="dist\src\app.js" />
     <Content Include="dist\src\index.html" />
+    <Content Include="dist\src\main.js" />
+    <Content Include="dist\src\umaMain.js" />
     <Content Include="Gruntfile.js" />
     <Content Include="index.html" />
+    <Content Include="main.js" />
     <Content Include="server.js" />
   </ItemGroup>
   <ItemGroup>
@@ -46,12 +69,8 @@
     <None Include="package.json" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="app\src\apiProxies\" />
     <Folder Include="app\src\assets\css\" />
     <Folder Include="app\src\assets\img\" />
-    <Folder Include="app\src\libs\" />
-    <Folder Include="app\src\pages\" />
-    <Folder Include="app\src\services\" />
     <Folder Include="Properties\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

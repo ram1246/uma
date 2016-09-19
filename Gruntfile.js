@@ -43,6 +43,8 @@
             srcJs: ['<%= pkg.sourceDir %>/src/*.js'],
             html: ['<%= pkg.sourceDir %>/src/**/*.html'],
             indexHtml: ['index.html'],
+            mainJs: ['main.js'],
+            umaMainJs: ['<%= pkg.sourceDir %>/src/umaMain.js'],
             htmlPages: ['<%= pkg.sourceDir %>/src/pages/**/*.html'],
             libsJs: ['<%= pkg.sourceDir %>/src/libs/*.js'],
             serviceJs: ['<%= pkg.sourceDir %>/src/services/**/*.js'],
@@ -52,7 +54,8 @@
             lessMain: ['<%= pkg.sourceDir %>/src/less/ums_main.less'],
             lessVariables: ['<%= pkg.sourceDir %>/src/less/variables.less'],
             lessMixins: ['<%= pkg.sourceDir %>/src/less/mixins.less'],
-            images: ['<%= pkg.sourceDir %>/src/assets/img/*.*']
+            images: ['<%= pkg.sourceDir %>/src/assets/img/*.*'],
+            loginJs: ['<%= pkg.sourceDir %>/src/login/*.js']
         },
         meta: {
             banner: '/**\n' +
@@ -64,9 +67,14 @@
             unit: ['<%= pkg.sourceDir %>/tests/unit/**/*.js']
         },
         watch: {
-            less: {
-                files: ['<%= src.lessAll %>'],
-                tasks: ['buildcss']
+            jshint: {
+                files: ['<%= src.js %>', 'html', 'Gruntfile.js', 'mainJs', 'htmlPages'],
+                tasks: ['jshint'],
+                options: {
+                    //spawn: false,
+                    interrupt: true //,
+                    //reload: false
+                }
             },
             release: {
                 files: ['<%= src.js %>', '<%= src.html %>', '<%= test.unit %>'],
@@ -92,6 +100,16 @@
                         flatten: true,
                         src: ['<%= src.indexHtml %>'],
                         dest: '<%= distMainDirectory %>'
+                    }
+                ]
+            },
+            login: {
+                files: [
+                    {
+                        expand: true,
+                        flatten: true,
+                        src: ['<%= src.loginJs %>'],
+                        dest: '<%= distMainDirectory %>/src/login'
                     }
                 ]
             },
@@ -155,19 +173,58 @@
                     }
                 ]
             },
+
+            mainJs: {
+                files: [
+                    {
+                        expand: true,
+                        flatten: true,
+                        src: ['<%= src.mainJs %>'],
+                        dest: '<%= distMainDirectory %>'
+                    }
+                ]
+            },
+            mainJs: {
+                files: [
+                    {
+                        expand: true,
+                        flatten: true,
+                        src: ['<%= src.umaMainJs %>'],
+                        dest: '<%= distMainDirectory %>'
+                    }
+                ]
+            },
             images: {
                 files: [
                     {
                         expand: true,
                         flatten: true,
                         src: ['<%= src.images %>'],
-                        dest: '<%= distMainDirectory %>/src/img'
+                        dest: '<%= distMainDirectory %>/img'
                     }
                 ]
             },
             widgets: {}
         },
-        requirejs: {},
+        requirejs: {
+            compile: {
+                options: {
+                    optimize: "none",
+                    logLevel: 0,
+                    name: "app",
+                    out: "dist/src/app.js",
+                    baseUrl: "<%= distDirectory %>",
+                    paths: {
+                        'app': './src/src/uma/app',
+                        'login': './src/src/login',
+                        'route': './src/src/uma',
+                        'angular': 'empty:',
+                        'uiRouter': 'empty:',
+                        'spin': 'empty:'
+                    }
+                }
+            }
+        },
         usebanner: {
             dist: {
                 options: {
@@ -273,6 +330,7 @@
         'copyfiles',
         'buildcss',
         'html2JS',
+        'requirejs',
         'usebanner:dist'//,
         //'clean:appRelease'
     ]);
@@ -288,6 +346,7 @@
     grunt.registerTask('html2JS', []);
 
     grunt.registerTask('copyfiles', [
+        'copy:login',
         'copy:indexHtml',
         'copy:srcJs',
         'copy:htmlPages',
@@ -295,7 +354,8 @@
         'copy:services',
         'copy:apiProxies',
         'copy:appCss',
-        'copy:images'
+        'copy:images',
+        'copy:mainJs',
     ]);
 
     grunt.registerTask('web-start', ['release', 'express:server', 'open:server', 'express-keepalive']);
