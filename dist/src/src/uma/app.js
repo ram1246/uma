@@ -23,19 +23,25 @@
     //var utilitiesService = require('src/src/services/utilities');
     //var alertTypeConstant = require('src/src/services/alertTypeConstant');
     //var alertService = require('src/src/services/alertService');
+    var userProfileController = require('login/userProfileController');
 
 
     var app = angular.module('myApp', ["ui.router", "inform", "ngIdle", "cgBusy", "firebase", "ui.bootstrap" ]);
 
     app.config(routes);
 
+    app.factory("Auth", ["$firebaseAuth", function ($firebaseAuth) {
+        return $firebaseAuth();
+    }]);
+
     app
         .controller('ParentController', parentController)
         .controller('loginController', loginController)
         .controller('registrationController', registrationController)
+        .controller('userProfileController', userProfileController)
         //.controller('forgotPasswordController', forgotPasswordController)
         //.service('utilitiesService', utilitiesService)
-        .service('Auth', authenticationService)
+        //.service('Auth', authenticationService)
         //.service('dk.loginService', loginService)
         //.service('baseApiProxy', baseApiProxy)
         //.service('organizationApiProxy', organizationApiProxy)
@@ -55,26 +61,16 @@
         //        }
         //    ]);
         //})
-        .run(function ($rootScope, $state, Auth) {
-            //before each state change, check if the user is logged in
-            //and authorized to move onto the next state
-            //console.log($state);
-            //$rootScope.$on('$stateChangeStart', function (event, next) {
-            //    var authorizedRoles = next.data.authorizedRoles;
+        .run(function ($rootScope, $state) {
 
-            //    if (authorizedRoles[0] === "initial") {
-            //        return;
-            //    }
-
-            //    if (!Auth.isAuthorized(authorizedRoles)) {
-            //        event.preventDefault();
-            //        if (Auth.isAuthenticated()) {
-            //            $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
-            //        } else {
-            //            $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
-            //        }
-            //    }
-            //});
+            $rootScope.$on("$stateChangeError", function (event, toState, toParams, fromState, fromParams, error) {
+                // We can catch the error thrown when the $requireSignIn promise is rejected
+                // and redirect the user back to the home page
+                if (error === "AUTH_REQUIRED") {
+                    console.log("login required");
+                    $state.go("login");
+                }
+            });
 
             /* To show current active state on menu */
             $rootScope.getClass = function (path) {
@@ -85,9 +81,7 @@
                 }
             };
 
-            $rootScope.logout = function () {
-                Auth.logout();
-            };
+            
         });
 
     app.init = function () {

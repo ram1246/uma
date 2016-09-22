@@ -1,7 +1,7 @@
 ﻿define(function() {
     'use strict';
 
-    var parentController = function($scope, $rootScope, $state, Auth, $uibModal, $timeout) {
+    var parentController = function($scope, $rootScope, $state, $uibModal, $timeout) {
 
         $scope.isLoggedOut = false;
 
@@ -67,7 +67,7 @@
         
     };
 
-    parentController.$inject = ['$scope', '$rootScope', '$state', 'Auth', '$uibModal', '$timeout'];
+    parentController.$inject = ['$scope', '$rootScope', '$state', '$uibModal', '$timeout'];
 
     return parentController;
 });

@@ -1,0 +1,14 @@
+﻿<div>
+    user profile
+
+    <div class="col-md-6 col-lg-6 col-md-offset-3" ng-show="showEmailReset">
+        <div class="row">
+            <div class="alert alert-success alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                {{successMessage}}
+            </div>
+        </div>
+    </div>
+
+    <a href="#" ng-click="sendPasswordResetEmail()">Reset Password</a>
+</div>

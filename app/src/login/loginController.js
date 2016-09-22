@@ -1,7 +1,7 @@
 ﻿define(function() {
     'use strict';
 
-    var loginController = function ($scope, $rootScope, $state, $window, authenticationService, idle, $firebaseAuth) {
+    var loginController = function ($scope, $rootScope, $state, $window, idle, $firebaseAuth) {
 
         var auth = $firebaseAuth();
 
@@ -9,7 +9,7 @@
 
         $scope.delay = 0;
         $scope.minDuration = 0;
-        $scope.message = 'Validating...';
+        $scope.message = 'Loging in...';
         $scope.backdrop = true;
         $scope.promise = null;
 
@@ -42,7 +42,7 @@
         
     };
 
-    loginController.$inject = ['$scope', '$rootScope', '$state', '$window', 'Auth', 'Idle', '$firebaseAuth'];
+    loginController.$inject = ['$scope', '$rootScope', '$state', '$window', 'Idle', '$firebaseAuth'];
 
     return loginController;
 });

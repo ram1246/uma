@@ -33,12 +33,12 @@
     <Content Include="app\src\app.js" />
     <Content Include="app\src\config\config.js" />
     <Content Include="app\src\libs\angular-busy.js" />
-    <Content Include="app\src\login\authenticationService.js" />
     <Content Include="app\src\login\forgotPasswordController.js" />
     <Content Include="app\src\login\loginConstant.js" />
     <Content Include="app\src\login\loginController.js" />
     <Content Include="app\src\login\parentController.js" />
     <Content Include="app\src\login\registrationController.js" />
+    <Content Include="app\src\login\userProfileController.js" />
     <Content Include="app\src\pages\about.html" />
     <Content Include="app\src\pages\contactus.html" />
     <Content Include="app\src\pages\home.html" />
@@ -49,6 +49,7 @@
     <Content Include="app\src\pages\pastevents.html" />
     <Content Include="app\src\pages\registration.html" />
     <Content Include="app\src\pages\upcomingevents.html" />
+    <Content Include="app\src\pages\userprofile.html" />
     <Content Include="app\src\services\validatorService.js" />
     <Content Include="app\src\umaMain.js" />
     <Content Include="app\src\routes.js" />
@@ -63,7 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app\src\less\mixins.less" />
-    <None Include="app\src\less\ums_main.less" />
+    <None Include="app\src\less\uma_main.less" />
     <None Include="app\src\less\variables.less" />
     <None Include="bower.json" />
     <None Include="package.json" />

@@ -50,8 +50,8 @@
             serviceJs: ['<%= pkg.sourceDir %>/src/services/**/*.js'],
             apiProxiesJs: ['<%= pkg.sourceDir %>/src/apiProxies/**/*.js'],
             widgetsJs: ['<%= pkg.sourceDir %>/src/widgets/**/*.js'],
-            cssDirectory: '<%= pkg.sourceDir %>/src/assets/css/**/*.css',
-            lessMain: ['<%= pkg.sourceDir %>/src/less/ums_main.less'],
+            cssDirectory: '<%= pkg.sourceDir %>/src/assets/css/*.css',
+            lessMain: ['<%= pkg.sourceDir %>/src/less/uma_main.less'],
             lessVariables: ['<%= pkg.sourceDir %>/src/less/variables.less'],
             lessMixins: ['<%= pkg.sourceDir %>/src/less/mixins.less'],
             images: ['<%= pkg.sourceDir %>/src/assets/img/*.*'],
@@ -163,17 +163,6 @@
                     }
                 ]
             },
-            apiProxies: {
-                files: [
-                    {
-                        expand: true,
-                        flatten: true,
-                        src: ['<%= src.apiProxiesJs %>'],
-                        dest: '<%= distMainDirectory %>/src/apiProxies'
-                    }
-                ]
-            },
-
             mainJs: {
                 files: [
                     {
@@ -327,8 +316,8 @@
     });
 
     grunt.registerTask('release', [
-        'copyfiles',
         'buildcss',
+        'copyfiles',
         'html2JS',
         'requirejs',
         'usebanner:dist'//,
@@ -352,7 +341,6 @@
         'copy:htmlPages',
         'copy:libsJs',
         'copy:services',
-        'copy:apiProxies',
         'copy:appCss',
         'copy:images',
         'copy:mainJs',

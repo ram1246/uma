@@ -1,5 +1,5 @@
 /**
- * uma.ui - 2016/09/19 02:35:51 UTC
+ * uma.ui - 2016/09/22 03:28:12 UTC
 */
 define('route/routes',[],function () {
     var routes = function ($stateProvider, $urlRouterProvider) {
@@ -73,6 +73,20 @@ define('route/routes',[],function () {
                 data: {},
                 resolve: resolveControllerDataByRoute("home")
             })
+            .state('userprofile', {
+                url: "/userprofile",
+                templateUrl: "userprofile.html",
+                controller: 'userProfileController',
+                resolve: {
+                    // controller will not be loaded until $requireSignIn resolves
+                    // Auth refers to our $firebaseAuth wrapper in the factory below
+                    "currentAuth": ["Auth", function (Auth) {
+                        // $requireSignIn returns a promise so the resolve waits for it to complete
+                        // If the promise is rejected, it will throw a $stateChangeError (see above)
+                        return Auth.$requireSignIn();
+                    }]
+                }
+            })
     };
 
     return routes;
@@ -100,7 +114,7 @@ define('login/session',[],function() {
 define('login/loginController',[],function() {
     'use strict';
 
-    var loginController = function ($scope, $rootScope, $state, $window, authenticationService, idle, $firebaseAuth) {
+    var loginController = function ($scope, $rootScope, $state, $window, idle, $firebaseAuth) {
 
         var auth = $firebaseAuth();
 
@@ -108,7 +122,7 @@ define('login/loginController',[],function() {
 
         $scope.delay = 0;
         $scope.minDuration = 0;
-        $scope.message = 'Validating...';
+        $scope.message = 'Loging in...';
         $scope.backdrop = true;
         $scope.promise = null;
 
@@ -141,14 +155,14 @@ define('login/loginController',[],function() {
         
     };
 
-    loginController.$inject = ['$scope', '$rootScope', '$state', '$window', 'Auth', 'Idle', '$firebaseAuth'];
+    loginController.$inject = ['$scope', '$rootScope', '$state', '$window', 'Idle', '$firebaseAuth'];
 
     return loginController;
 });
 define('login/parentController',[],function() {
     'use strict';
 
-    var parentController = function($scope, $rootScope, $state, Auth, $uibModal, $timeout) {
+    var parentController = function($scope, $rootScope, $state, $uibModal, $timeout) {
 
         $scope.isLoggedOut = false;
 
@@ -214,7 +228,7 @@ define('login/parentController',[],function() {
         
     };
 
-    parentController.$inject = ['$scope', '$rootScope', '$state', 'Auth', '$uibModal', '$timeout'];
+    parentController.$inject = ['$scope', '$rootScope', '$state', '$uibModal', '$timeout'];
 
     return parentController;
 });
@@ -222,41 +236,83 @@ define('login/registrationController',[],function () {
     'use strict';
 
     var registrationController = function ($scope, $firebaseObject, $firebaseAuth) {
+
+        $scope.delay = 0;
+        $scope.minDuration = 0;
+        $scope.message = 'Loging in...';
+        $scope.backdrop = true;
+        $scope.promise = null;
+
         var self = this;
 
         var auth = $firebaseAuth();
 
+        var ref = firebase.database().ref();
+
+        var userData = ref.child("users"); //ref.child("users");
+
         $scope.submitted = false;
 
+        $scope.showMessageRegistration = false;
+        
         var onUserRegistrationReject = function (error) {
-
+            $scope.showMessageRegistration = true;
+            $scope.successMessage = error.message;
         };
 
-        var onUserRegistrationSuccess = function (email) {
+        var onUserRegistrationSuccess = function () {
+            $scope.showMessageRegistration = true;
+            $scope.successMessage = "Registration successful.";
+        };
 
+        $scope.user = {
+            "firstName": "Ram",
+            "middleName": "M",
+            "lastName": "Manoher",
+            "address": "123 Main St, Chicago, IL 60067",
+            "username": "ss.varn@gmail.com",
+            "password": "password123",
+            "confirmPassword": "password123"
         };
 
         $scope.registerUser = function (form, user) {
-            var x = {
-                firstName: "test1",
-                middleName: "test2",
-                lastName: "test3",
-                address: "123 main street, Chicago, IL 60067",
-                email: "ss.varn@gmail.com",
-                password: "password123"
+            var userToSave = {
+                firstName: user.firstName,
+                middleName: user.middleName,
+                lastName: user.lastName,
+                address: user.address,
+                email: user.username,
+                password: user.password
             };
-            createUser(x);
+            createUser(userToSave);
         };
 
-        function createUser(userData) {
-            auth.$createUserWithEmailAndPassword(userData.email, userData.password)
+        function createUser(user) {
+            var additionUserDetails = {
+                firstName: user.firstName,
+                middleName: user.middleName,
+                lastName: user.lastName,
+                address: user.address
+            };
+
+            $scope.promise = auth.$createUserWithEmailAndPassword(user.email, user.password);
+
+            $scope.promise
                 .then(function (firebaseUser) {
+                    addUserDetails(additionUserDetails);
+                    onUserRegistrationSuccess();
                     console.log("User created with uid: " + firebaseUser.uid)
                 })
                 .catch(function (error) {
                     console.log(error);
+                    onUserRegistrationReject(error);
                });
         }
+
+        function addUserDetails(user) {
+            userData.set(user);
+        }
+
     };
 
     registrationController.$inject = ["$scope", "$firebaseObject", "$firebaseAuth"];
@@ -300,7 +356,31 @@ define('login/loginConstant',[],function() {
         }
     };
 });
-define('app',['require','angular','route/routes','login/session','login/loginController','login/parentController','login/registrationController','login/authenticationService','login/loginConstant'],function (require) {
+define('login/userProfileController',[],function () {
+    'use strict';
+
+    var userProfileController = function ($scope, $rootScope, $state, $firebaseAuth, currentAuth) {
+        var auth = $firebaseAuth();
+        
+        $scope.showEmailReset = false;
+        
+        $scope.sendPasswordResetEmail = function () {
+            auth.$sendPasswordResetEmail(currentAuth.email).then(function () {
+                console.log("Password reset email sent successfully!");
+                $scope.successMessage = "Password reset email sent successfully!";
+                $scope.showMessageRegistration = true;
+            }).catch(function (error) {
+                console.error("Error: ", error);
+                $scope.successMessage = "Error while sending password reset email, Please try again later";
+            });
+        };
+    };
+
+    userProfileController.$inject = ["$scope", "$rootScope", "$state", "$firebaseAuth", "currentAuth"];
+
+    return userProfileController;
+});
+define('app',['require','angular','route/routes','login/session','login/loginController','login/parentController','login/registrationController','login/authenticationService','login/loginConstant','login/userProfileController'],function (require) {
     'use strict';
 
     var angular = require('angular');
@@ -325,19 +405,25 @@ define('app',['require','angular','route/routes','login/session','login/loginCon
     //var utilitiesService = require('src/src/services/utilities');
     //var alertTypeConstant = require('src/src/services/alertTypeConstant');
     //var alertService = require('src/src/services/alertService');
+    var userProfileController = require('login/userProfileController');
 
 
     var app = angular.module('myApp', ["ui.router", "inform", "ngIdle", "cgBusy", "firebase", "ui.bootstrap" ]);
 
     app.config(routes);
 
+    app.factory("Auth", ["$firebaseAuth", function ($firebaseAuth) {
+        return $firebaseAuth();
+    }]);
+
     app
         .controller('ParentController', parentController)
         .controller('loginController', loginController)
         .controller('registrationController', registrationController)
+        .controller('userProfileController', userProfileController)
         //.controller('forgotPasswordController', forgotPasswordController)
         //.service('utilitiesService', utilitiesService)
-        .service('Auth', authenticationService)
+        //.service('Auth', authenticationService)
         //.service('dk.loginService', loginService)
         //.service('baseApiProxy', baseApiProxy)
         //.service('organizationApiProxy', organizationApiProxy)
@@ -357,26 +443,16 @@ define('app',['require','angular','route/routes','login/session','login/loginCon
         //        }
         //    ]);
         //})
-        .run(function ($rootScope, $state, Auth) {
-            //before each state change, check if the user is logged in
-            //and authorized to move onto the next state
-            //console.log($state);
-            //$rootScope.$on('$stateChangeStart', function (event, next) {
-            //    var authorizedRoles = next.data.authorizedRoles;
+        .run(function ($rootScope, $state) {
 
-            //    if (authorizedRoles[0] === "initial") {
-            //        return;
-            //    }
-
-            //    if (!Auth.isAuthorized(authorizedRoles)) {
-            //        event.preventDefault();
-            //        if (Auth.isAuthenticated()) {
-            //            $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
-            //        } else {
-            //            $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
-            //        }
-            //    }
-            //});
+            $rootScope.$on("$stateChangeError", function (event, toState, toParams, fromState, fromParams, error) {
+                // We can catch the error thrown when the $requireSignIn promise is rejected
+                // and redirect the user back to the home page
+                if (error === "AUTH_REQUIRED") {
+                    console.log("login required");
+                    $state.go("login");
+                }
+            });
 
             /* To show current active state on menu */
             $rootScope.getClass = function (path) {
@@ -387,9 +463,7 @@ define('app',['require','angular','route/routes','login/session','login/loginCon
                 }
             };
 
-            $rootScope.logout = function () {
-                Auth.logout();
-            };
+            
         });
 
     app.init = function () {
