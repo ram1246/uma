@@ -1,5 +1,5 @@
 /**
- * uma.ui - 2016/09/22 03:28:12 UTC
+ * uma.ui - 2016/09/23 14:09:33 UTC
 */
 define('route/routes',[],function () {
     var routes = function ($stateProvider, $urlRouterProvider) {
@@ -132,9 +132,6 @@ define('login/loginController',[],function() {
             $scope.loginErrorMessage = error.message;
         };
 
-        $scope.email = "ss.varn@gmail.com";
-        $scope.password = "password123";
-
         $scope.validateUser = function (userName, password) {
             $scope.submitted = true;
 
@@ -265,17 +262,7 @@ define('login/registrationController',[],function () {
             $scope.successMessage = "Registration successful.";
         };
 
-        $scope.user = {
-            "firstName": "Ram",
-            "middleName": "M",
-            "lastName": "Manoher",
-            "address": "123 Main St, Chicago, IL 60067",
-            "username": "ss.varn@gmail.com",
-            "password": "password123",
-            "confirmPassword": "password123"
-        };
-
-        $scope.registerUser = function (form, user) {
+       $scope.registerUser = function (form, user) {
             var userToSave = {
                 firstName: user.firstName,
                 middleName: user.middleName,
@@ -361,6 +348,8 @@ define('login/userProfileController',[],function () {
 
     var userProfileController = function ($scope, $rootScope, $state, $firebaseAuth, currentAuth) {
         var auth = $firebaseAuth();
+
+        console.log(currentAuth);
         
         $scope.showEmailReset = false;
         

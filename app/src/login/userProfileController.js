@@ -3,6 +3,8 @@
 
     var userProfileController = function ($scope, $rootScope, $state, $firebaseAuth, currentAuth) {
         var auth = $firebaseAuth();
+
+        console.log(currentAuth);
         
         $scope.showEmailReset = false;
         

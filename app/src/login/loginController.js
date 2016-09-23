@@ -19,9 +19,6 @@
             $scope.loginErrorMessage = error.message;
         };
 
-        $scope.email = "ss.varn@gmail.com";
-        $scope.password = "password123";
-
         $scope.validateUser = function (userName, password) {
             $scope.submitted = true;
 

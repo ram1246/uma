@@ -31,17 +31,7 @@
             $scope.successMessage = "Registration successful.";
         };
 
-        $scope.user = {
-            "firstName": "Ram",
-            "middleName": "M",
-            "lastName": "Manoher",
-            "address": "123 Main St, Chicago, IL 60067",
-            "username": "ss.varn@gmail.com",
-            "password": "password123",
-            "confirmPassword": "password123"
-        };
-
-        $scope.registerUser = function (form, user) {
+       $scope.registerUser = function (form, user) {
             var userToSave = {
                 firstName: user.firstName,
                 middleName: user.middleName,
