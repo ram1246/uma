@@ -25,69 +25,73 @@
 </head>
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
     <!-- Navigation -->
-    <div class="page-header">
-        <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
-                        Menu <i class="fa fa-bars"></i>
-                    </button>
-                    <a class="navbar-brand page-scroll" href="#/intro" ui-sref="intro">
-                        <i class="fa fa-play-circle"></i> <span class="light">UMA</span> Home
-                    </a>
-                </div>
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
-                    <ul class="nav navbar-nav">
-                        <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
-                        <li class="hidden">
-                            <a href="#page-top"></a>
-                        </li>
-                        <li>
-                            <a class="page-scroll" href="#/upcomingevents" ui-sref="upcomingevents">Upcoming Events</a>
-                        </li>
-                        <li>
-                            <a class="page-scroll" href="#/pastevents" ui-sref="pastevents">Past Events</a>
-                        </li>
-                        <li>
-                            <a class="page-scroll" href="#/about" ui-sref="about">About</a>
-                        </li>
-                        <li>
-                            <a class="page-scroll" href="#/contactus" ui-sref="contactus">Contact Us</a>
-                        </li>
-                        <li>
-                            <a class="page-scroll" href="#/login" ui-sref="login">Memeber Sign-In</a>
-                        </li>
+    <div ng-controller="ParentController">
+        <div class="page-header">
+            <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                            Menu <i class="fa fa-bars"></i>
+                        </button>
+                        <a class="navbar-brand page-scroll" href="#/intro" ui-sref="intro">
+                            <i class="fa fa-play-circle"></i> <span class="light">UMA</span> Home
+                        </a>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                        <ul class="nav navbar-nav">
+                            <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                            <li class="hidden">
+                                <a href="#page-top"></a>
+                            </li>
+                            <li>
+                                <a class="page-scroll" href="#/upcomingevents" ui-sref="upcomingevents">Upcoming Events</a>
+                            </li>
+                            <li>
+                                <a class="page-scroll" href="#/pastevents" ui-sref="pastevents">Past Events</a>
+                            </li>
+                            <li>
+                                <a class="page-scroll" href="#/about" ui-sref="about">About</a>
+                            </li>
+                            <li>
+                                <a class="page-scroll" href="#/contactus" ui-sref="contactus">Contact Us</a>
+                            </li>
 
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                <i class="fa fa-user fa-fw"></i> {{userName}} <i class="fa fa-caret-down"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-user">
-                                <li>
-                                    <a href="#/userprofile" ui-sref="userprofile"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <a href="#" ng-click="logout()"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                                </li>
-                            </ul>
-                            <!-- /.dropdown-user -->
-                        </li>
-                        <li>
-                            <a class="page-scroll" href="#" ui-sref="login">Donate</a>
-                        </li>
-                    </ul>
+                            <li ng-show="!firebaseUser">
+                                <a class="page-scroll" href="#/login" ui-sref="login">Memeber Sign-In</a>
+                            </li>
+
+                            <li class="dropdown" ng-show="firebaseUser">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <i class="fa fa-user fa-fw"></i> {{userName}} <i class="fa fa-caret-down"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-user">
+                                    <li>
+                                        <a href="#/userprofile" ui-sref="userprofile"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li>
+                                        <a href="#" ng-click="logout()"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                                    </li>
+                                </ul>
+                                <!-- /.dropdown-user -->
+                            </li>
+                            <li>
+                                <a class="page-scroll" href="#" ui-sref="login">Donate</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- /.navbar-collapse -->
                 </div>
-                <!-- /.navbar-collapse -->
-            </div>
-            <!-- /.container -->
-        </nav>
+                <!-- /.container -->
+            </nav>
+        </div>
+
+        <div id="wrapper" class="container">
+            <div ui-view></div>
+        </div>
     </div>
-    
-    <div ng-controller="ParentController" id="wrapper" class="container">
-        <div ui-view></div>
-    </div>
+   
 
     
     <!-- Footer -->

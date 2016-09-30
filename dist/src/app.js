@@ -1,5 +1,5 @@
 /**
- * uma.ui - 2016/09/23 14:09:33 UTC
+ * uma.ui - 2016/09/30 23:55:31 UTC
 */
 define('route/routes',[],function () {
     var routes = function ($stateProvider, $urlRouterProvider) {
@@ -114,7 +114,7 @@ define('login/session',[],function() {
 define('login/loginController',[],function() {
     'use strict';
 
-    var loginController = function ($scope, $rootScope, $state, $window, idle, $firebaseAuth) {
+    var loginController = function ($scope, $rootScope, $state, $window, idle, $firebaseAuth, $firebaseObject) {
 
         var auth = $firebaseAuth();
 
@@ -141,6 +141,7 @@ define('login/loginController',[],function() {
 
                 $scope.promise.then(function (firebaseUser) {
                     console.log("Signed in as:", firebaseUser.uid);
+                    $rootScope.$emit('rootScope:userLoggedIn', firebaseUser);
                     $state.transitionTo('home');
                     //idle.watch();
                 }).catch(function(error) {
@@ -152,16 +153,20 @@ define('login/loginController',[],function() {
         
     };
 
-    loginController.$inject = ['$scope', '$rootScope', '$state', '$window', 'Idle', '$firebaseAuth'];
+    loginController.$inject = ['$scope', '$rootScope', '$state', '$window', 'Idle', '$firebaseAuth', '$firebaseObject'];
 
     return loginController;
 });
 define('login/parentController',[],function() {
     'use strict';
 
-    var parentController = function($scope, $rootScope, $state, $uibModal, $timeout) {
+    var parentController = function ($scope, $rootScope, $state, $uibModal, $timeout, $firebaseAuth) {
 
         $scope.isLoggedOut = false;
+
+        var authObj = $firebaseAuth();
+
+        $scope.firebaseUser = authObj.$getAuth();
 
         var showLoginPage = function() {
             $state.go('login');
@@ -220,12 +225,21 @@ define('login/parentController',[],function() {
             $state.go('login');
         });
 
+        $scope.logout = function () {
+            authObj.$signOut();
+            $scope.firebaseUser = false;
+            showLoginPageAfterLogout();
+        };
+
+        $rootScope.$on('rootScope:userLoggedIn', function (event, data) {
+            console.log(data); // 'Emit!'
+            $scope.firebaseUser = authObj.$getAuth();
+        });
 
         $scope.currentUser = null;
-        
     };
 
-    parentController.$inject = ['$scope', '$rootScope', '$state', '$uibModal', '$timeout'];
+    parentController.$inject = ['$scope', '$rootScope', '$state', '$uibModal', '$timeout', "$firebaseAuth"];
 
     return parentController;
 });
@@ -236,7 +250,7 @@ define('login/registrationController',[],function () {
 
         $scope.delay = 0;
         $scope.minDuration = 0;
-        $scope.message = 'Loging in...';
+        $scope.message = 'Please wait...';
         $scope.backdrop = true;
         $scope.promise = null;
 
@@ -246,7 +260,7 @@ define('login/registrationController',[],function () {
 
         var ref = firebase.database().ref();
 
-        var userData = ref.child("users"); //ref.child("users");
+        var userData = ref.child("users"); 
 
         $scope.submitted = false;
 
@@ -297,7 +311,7 @@ define('login/registrationController',[],function () {
         }
 
         function addUserDetails(user) {
-            userData.set(user);
+            userData.push(user);
         }
 
     };
@@ -369,32 +383,58 @@ define('login/userProfileController',[],function () {
 
     return userProfileController;
 });
-define('app',['require','angular','route/routes','login/session','login/loginController','login/parentController','login/registrationController','login/authenticationService','login/loginConstant','login/userProfileController'],function (require) {
+define('login/forgotPasswordController',[],function () {
+    'use strict';
+
+    var forgotPasswordController = function ($scope, $firebaseAuth) {
+
+        var auth = $firebaseAuth();
+
+        $scope.delay = 0;
+        $scope.minDuration = 0;
+        $scope.message = 'Loging in...';
+        $scope.backdrop = true;
+        $scope.promise = null;
+
+        $scope.submitted = false;
+
+        $scope.email = 'ss.varn@gmail.com';
+
+        $scope.sendPasswordResetEmail = function () {
+            $scope.submitted = true;
+
+            if ($scope.forgotpassword.email.$valid) {
+
+                $scope.promise = auth.$sendPasswordResetEmail($scope.email);
+
+                $scope.promise.then(function () {
+                    $scope.successMessage = "Password reset email sent successfully!";
+                    $scope.showMessageRegistration = true;
+                }).catch(function (error) {
+                    $scope.successMessage = "Error while sending password reset email, Please try again later";
+                });
+            }
+        };
+    };
+
+    forgotPasswordController.$inject = ['$scope', '$firebaseAuth'];
+
+    return forgotPasswordController;
+});
+define('app',['require','angular','route/routes','login/session','login/loginController','login/parentController','login/registrationController','login/authenticationService','login/loginConstant','login/userProfileController','login/forgotPasswordController'],function (require) {
     'use strict';
 
     var angular = require('angular');
     var routes = require('route/routes');
 
     var session = require('login/session');
-    //var authIntercepter = require('login/authIntercepter');
     var loginController = require('login/loginController');
     var parentController = require('login/parentController');
     var registrationController = require('login/registrationController');
-    //var forgotPasswordController = require('login/forgotPasswordController');
-    //var configConstant = require('src/src/config/config');
-    //var serviceConstant = require('src/src/services/serviceConstant');
-    //var baseApiProxy = require('src/src/apiProxies/baseApiProxy');
-    //var organizationApiProxy = require('src/src/apiProxies/organizationApiProxy');
     var authenticationService = require('login/authenticationService');
-    //var formAutofillFixDirective = require('login/formAutofillFixDirective');
     var loginConstant = require('login/loginConstant');
-    //var routes = require('route/routes');
-    //var translateService = require('src/src/services/translateService');
-    //var loginService = require('login/loginService');
-    //var utilitiesService = require('src/src/services/utilities');
-    //var alertTypeConstant = require('src/src/services/alertTypeConstant');
-    //var alertService = require('src/src/services/alertService');
     var userProfileController = require('login/userProfileController');
+    var forgotPasswordController = require('login/forgotPasswordController');
 
 
     var app = angular.module('myApp', ["ui.router", "inform", "ngIdle", "cgBusy", "firebase", "ui.bootstrap" ]);
@@ -410,30 +450,9 @@ define('app',['require','angular','route/routes','login/session','login/loginCon
         .controller('loginController', loginController)
         .controller('registrationController', registrationController)
         .controller('userProfileController', userProfileController)
-        //.controller('forgotPasswordController', forgotPasswordController)
-        //.service('utilitiesService', utilitiesService)
-        //.service('Auth', authenticationService)
-        //.service('dk.loginService', loginService)
-        //.service('baseApiProxy', baseApiProxy)
-        //.service('organizationApiProxy', organizationApiProxy)
-        //.service('AuthInterceptor', authIntercepter)
-        //.service('translateService', translateService)
-        //.constant('dk.serviceConstant', serviceConstant)
-        //.constant('dk.configConstant', configConstant)
-        //.constant('USER_ROLES', loginConstant.USER_ROLES)
-        //.constant('alertTypeConstant', alertTypeConstant)
-        //.service('alertService', alertService)
-        //.directive('formAutofillFix', formAutofillFixDirective)
-        //.config(function ($httpProvider) {
-        //    $httpProvider.interceptors.push([
-        //        '$injector',
-        //        function ($injector) {
-        //            return $injector.get('AuthInterceptor');
-        //        }
-        //    ]);
-        //})
+        .controller('forgotPasswordController', forgotPasswordController)
+        
         .run(function ($rootScope, $state) {
-
             $rootScope.$on("$stateChangeError", function (event, toState, toParams, fromState, fromParams, error) {
                 // We can catch the error thrown when the $requireSignIn promise is rejected
                 // and redirect the user back to the home page
@@ -451,8 +470,6 @@ define('app',['require','angular','route/routes','login/session','login/loginCon
                     return "";
                 }
             };
-
-            
         });
 
     app.init = function () {

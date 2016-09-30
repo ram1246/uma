@@ -5,7 +5,7 @@
 
         $scope.delay = 0;
         $scope.minDuration = 0;
-        $scope.message = 'Loging in...';
+        $scope.message = 'Please wait...';
         $scope.backdrop = true;
         $scope.promise = null;
 
@@ -15,7 +15,7 @@
 
         var ref = firebase.database().ref();
 
-        var userData = ref.child("users"); //ref.child("users");
+        var userData = ref.child("users"); 
 
         $scope.submitted = false;
 
@@ -66,7 +66,7 @@
         }
 
         function addUserDetails(user) {
-            userData.set(user);
+            userData.push(user);
         }
 
     };

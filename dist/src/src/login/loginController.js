@@ -1,7 +1,7 @@
 ﻿define(function() {
     'use strict';
 
-    var loginController = function ($scope, $rootScope, $state, $window, idle, $firebaseAuth) {
+    var loginController = function ($scope, $rootScope, $state, $window, idle, $firebaseAuth, $firebaseObject) {
 
         var auth = $firebaseAuth();
 
@@ -28,6 +28,7 @@
 
                 $scope.promise.then(function (firebaseUser) {
                     console.log("Signed in as:", firebaseUser.uid);
+                    $rootScope.$emit('rootScope:userLoggedIn', firebaseUser);
                     $state.transitionTo('home');
                     //idle.watch();
                 }).catch(function(error) {
@@ -39,7 +40,7 @@
         
     };
 
-    loginController.$inject = ['$scope', '$rootScope', '$state', '$window', 'Idle', '$firebaseAuth'];
+    loginController.$inject = ['$scope', '$rootScope', '$state', '$window', 'Idle', '$firebaseAuth', '$firebaseObject'];
 
     return loginController;
 });

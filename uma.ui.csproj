@@ -41,6 +41,7 @@
     <Content Include="app\src\login\userProfileController.js" />
     <Content Include="app\src\pages\about.html" />
     <Content Include="app\src\pages\contactus.html" />
+    <Content Include="app\src\pages\forgotpassword.html" />
     <Content Include="app\src\pages\home.html" />
     <Content Include="app\src\pages\index.html" />
     <Content Include="app\src\pages\initiatives.html" />

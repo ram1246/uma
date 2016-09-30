@@ -1,5 +1,5 @@
 /**
- * uma.ui - 2016/09/23 14:09:33 UTC
+ * uma.ui - 2016/09/30 23:55:31 UTC
 */
 function collapseNavbar() {
     if ($(".navbar").offset().top > 50) {

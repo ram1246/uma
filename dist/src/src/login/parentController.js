@@ -1,9 +1,13 @@
 ﻿define(function() {
     'use strict';
 
-    var parentController = function($scope, $rootScope, $state, $uibModal, $timeout) {
+    var parentController = function ($scope, $rootScope, $state, $uibModal, $timeout, $firebaseAuth) {
 
         $scope.isLoggedOut = false;
+
+        var authObj = $firebaseAuth();
+
+        $scope.firebaseUser = authObj.$getAuth();
 
         var showLoginPage = function() {
             $state.go('login');
@@ -62,12 +66,21 @@
             $state.go('login');
         });
 
+        $scope.logout = function () {
+            authObj.$signOut();
+            $scope.firebaseUser = false;
+            showLoginPageAfterLogout();
+        };
+
+        $rootScope.$on('rootScope:userLoggedIn', function (event, data) {
+            console.log(data); // 'Emit!'
+            $scope.firebaseUser = authObj.$getAuth();
+        });
 
         $scope.currentUser = null;
-        
     };
 
-    parentController.$inject = ['$scope', '$rootScope', '$state', '$uibModal', '$timeout'];
+    parentController.$inject = ['$scope', '$rootScope', '$state', '$uibModal', '$timeout', "$firebaseAuth"];
 
     return parentController;
 });
