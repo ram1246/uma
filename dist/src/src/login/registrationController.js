@@ -15,12 +15,12 @@
 
         var ref = firebase.database().ref();
 
-        var userData = ref.child("users"); 
+        var userData = ref.child("users");
 
         $scope.submitted = false;
 
         $scope.showMessageRegistration = false;
-        
+
         var onUserRegistrationReject = function (error) {
             $scope.showMessageRegistration = true;
             $scope.successMessage = error.message;
@@ -31,7 +31,7 @@
             $scope.successMessage = "Registration successful.";
         };
 
-       $scope.registerUser = function (form, user) {
+        $scope.registerUser = function (form, user) {
             var userToSave = {
                 firstName: user.firstName,
                 middleName: user.middleName,
@@ -43,18 +43,19 @@
             createUser(userToSave);
         };
 
-        function createUser(user) {
-            var additionUserDetails = {
-                firstName: user.firstName,
-                middleName: user.middleName,
-                lastName: user.lastName,
-                address: user.address
-            };
-
+        function createUser(user, userId) {
+            
             $scope.promise = auth.$createUserWithEmailAndPassword(user.email, user.password);
 
             $scope.promise
                 .then(function (firebaseUser) {
+                    var additionUserDetails = {
+                        uid: firebaseUser.uid,
+                        firstName: user.firstName,
+                        middleName: user.middleName,
+                        lastName: user.lastName,
+                        address: user.address
+                    };
                     addUserDetails(additionUserDetails);
                     onUserRegistrationSuccess();
                     console.log("User created with uid: " + firebaseUser.uid)
@@ -62,11 +63,11 @@
                 .catch(function (error) {
                     console.log(error);
                     onUserRegistrationReject(error);
-               });
+                });
         }
 
-        function addUserDetails(user) {
-            userData.push(user);
+        function addUserDetails(additionUserDetails) {
+            userData.push(additionUserDetails);
         }
 
     };
