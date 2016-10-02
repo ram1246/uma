@@ -12,7 +12,7 @@
     <!-- Custom Fonts -->
     <link href="../../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <!-- Theme CSS -->
-    <!--<link href="../css/app-common.min.css" rel="stylesheet">-->
+    <link href="../css/style.css" rel="stylesheet">
     <link href="../css/angular-busy.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -23,83 +23,78 @@
     <![endif]-->
     <script data-main="../main.js" src="../../bower_components/requirejs/require.js"></script>
 </head>
-<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
-    <!-- Navigation -->
+<body>
     <div ng-controller="ParentController">
-        <div class="page-header">
-            <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
-                <div class="container">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
-                            Menu <i class="fa fa-bars"></i>
-                        </button>
-                        <a class="navbar-brand page-scroll" href="#/intro" ui-sref="intro">
-                            <i class="fa fa-play-circle"></i> <span class="light">UMA</span> Home
-                        </a>
-                    </div>
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
-                        <ul class="nav navbar-nav">
-                            <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
-                            <li class="hidden">
-                                <a href="#page-top"></a>
-                            </li>
-                            <li>
-                                <a class="page-scroll" href="#/upcomingevents" ui-sref="upcomingevents">Upcoming Events</a>
-                            </li>
-                            <li>
-                                <a class="page-scroll" href="#/pastevents" ui-sref="pastevents">Past Events</a>
-                            </li>
-                            <li>
-                                <a class="page-scroll" href="#/about" ui-sref="about">About</a>
-                            </li>
-                            <li>
-                                <a class="page-scroll" href="#/contactus" ui-sref="contactus">Contact Us</a>
-                            </li>
-
-                            <li ng-show="!firebaseUser">
-                                <a class="page-scroll" href="#/login" ui-sref="login">Memeber Sign-In</a>
-                            </li>
-
-                            <li class="dropdown" ng-show="firebaseUser">
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                    <i class="fa fa-user fa-fw"></i> {{userName}} <i class="fa fa-caret-down"></i>
-                                </a>
-                                <ul class="dropdown-menu dropdown-user">
-                                    <li>
-                                        <a href="#/userprofile" ui-sref="userprofile"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                                    </li>
-                                    <li class="divider"></li>
-                                    <li>
-                                        <a href="#" ng-click="logout()"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                                    </li>
-                                </ul>
-                                <!-- /.dropdown-user -->
-                            </li>
-                            <li>
-                                <a class="page-scroll" href="#" ui-sref="login">Donate</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- /.navbar-collapse -->
+        <div id="header">
+            <div class="wrap clearfix">
+                <div id="header-logo" class="fl">
+                    <a  href="#/home" ui-sref="home" class="navbar-left"><img src="../src/img/logo1_withtext.png"></a>
                 </div>
-                <!-- /.container -->
-            </nav>
+                <div id="nav" class="fr">
+                    <ul>
+                        <li class="hidden">
+                            <a href="#page-top"></a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="#/upcomingevents" ui-sref="upcomingevents">Upcoming Events</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="#/pastevents" ui-sref="pastevents">Past Events</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="#/about" ui-sref="about">About</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="#/contactus" ui-sref="contactus">Contact Us</a>
+                        </li>
+
+                        <li ng-show="!firebaseUser">
+                            <a class="page-scroll" href="#/login" ui-sref="login">Memeber Sign-In</a>
+                        </li>
+
+                        <li class="dropdown" ng-show="firebaseUser">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="fa fa-user fa-fw"></i> {{userName}} <i class="fa fa-caret-down"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li>
+                                    <a href="#/userprofile" ui-sref="userprofile"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="#" ng-click="logout()"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                                </li>
+                            </ul>
+                            <!-- /.dropdown-user -->
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="#" ui-sref="login">Donate</a>
+                        </li>
+                    </ul>
+                </div>
+            </div><!-- // end .wrap -->
+        </div><!-- // end #header -->
+        
+        <div id="blurb">
+            <div class="wrap clearfix">
+                <!--<p>              
+                    UMA is committed to promote the ethnic heritage of Uttarakhand, by hosting cultural events throughout the year
+                    by bringing the families and individuals together under one platform and share  their values and experiences.
+                </p>-->
+            </div>
         </div>
 
-        <div id="wrapper" class="container">
+        <div id="wrapper" class="wrap">
             <div ui-view></div>
         </div>
     </div>
-   
-
-    
+           
     <!-- Footer -->
-    <footer>
-        <div class="navbar navbar-inner  navbar-fixed-bottom">
+    <div id="footer">
+        <div class="wrap clearfix">
             <p class="text-center">Copyright &copy; Uttarakhand Midwest Association 2016</p>
         </div>
-    </footer>
+    </div>
 
     <!-- Angular -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
