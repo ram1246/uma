@@ -34,8 +34,8 @@
 
     grunt.initConfig({
         distDirectory: 'dist',
-        distMainDirectory: '<%= distDirectory %>/src',
-        cssDistDirectory: '<%= distDirectory %>/src/css',
+        distMainDirectory: '<%= distDirectory %>',
+        cssDistDirectory: '<%= distDirectory %>/css',
         distLibs: '<%= distDirectory %>/libs',
         pkg: grunt.file.readJSON('package.json'),
         src: {
@@ -173,7 +173,7 @@
                     }
                 ]
             },
-            mainJs: {
+            umaMainJs: {
                 files: [
                     {
                         expand: true,
@@ -201,12 +201,12 @@
                     optimize: "none",
                     logLevel: 0,
                     name: "app",
-                    out: "dist/src/app.js",
+                    out: "dist/app.js",
                     baseUrl: "<%= distDirectory %>",
                     paths: {
-                        'app': './src/src/uma/app',
-                        'login': './src/src/login',
-                        'route': './src/src/uma',
+                        'app': './src/uma/app',
+                        'login': './src/login',
+                        'route': './src/uma',
                         'angular': 'empty:',
                         'uiRouter': 'empty:',
                         'spin': 'empty:'
@@ -302,7 +302,7 @@
                     port: 9001,
                     hostname: "localhost",
                     server: path.resolve('./server.js'),
-                    bases: [path.resolve('dist/src')],
+                    bases: [path.resolve('dist')],
                     debug: true
                 }
             }
@@ -320,8 +320,8 @@
         'copyfiles',
         'html2JS',
         'requirejs',
-        'usebanner:dist'//,
-        //'clean:appRelease'
+        'usebanner:dist',
+        'clean:appRelease'
     ]);
 
     grunt.registerTask('buildcss', [
@@ -344,6 +344,7 @@
         'copy:appCss',
         'copy:images',
         'copy:mainJs',
+        'copy:umaMainJs'
     ]);
 
     grunt.registerTask('web-start', ['release', 'express:server', 'open:server', 'express-keepalive']);

@@ -70,6 +70,12 @@
                 data: {},
                 resolve: resolveControllerDataByRoute("home")
             })
+            .state('donate', {
+                url: "/donate",
+                templateUrl: "donate.html",
+                data: {},
+                resolve: resolveControllerDataByRoute("home")
+            })
             .state('userprofile', {
                 url: "/userprofile",
                 templateUrl: "userprofile.html",

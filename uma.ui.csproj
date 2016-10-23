@@ -41,6 +41,7 @@
     <Content Include="app\src\login\userProfileController.js" />
     <Content Include="app\src\pages\about.html" />
     <Content Include="app\src\pages\contactus.html" />
+    <Content Include="app\src\pages\donate.html" />
     <Content Include="app\src\pages\forgotpassword.html" />
     <Content Include="app\src\pages\home.html" />
     <Content Include="app\src\pages\index.html" />
@@ -54,10 +55,6 @@
     <Content Include="app\src\services\validatorService.js" />
     <Content Include="app\src\umaMain.js" />
     <Content Include="app\src\routes.js" />
-    <Content Include="dist\src\app.js" />
-    <Content Include="dist\src\index.html" />
-    <Content Include="dist\src\main.js" />
-    <Content Include="dist\src\umaMain.js" />
     <Content Include="Gruntfile.js" />
     <Content Include="index.html" />
     <Content Include="main.js" />
@@ -73,6 +70,7 @@
   <ItemGroup>
     <Folder Include="app\src\assets\css\" />
     <Folder Include="app\src\assets\img\" />
+    <Folder Include="dist\src\" />
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>

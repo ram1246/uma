@@ -32,6 +32,7 @@
         };
 
         $scope.registerUser = function (form, user) {
+            $scope.submitted = true;
             var userToSave = {
                 firstName: user.firstName,
                 middleName: user.middleName,

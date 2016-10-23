@@ -4,11 +4,9 @@
     var angular = require('angular');
     var routes = require('route/routes');
 
-    var session = require('login/session');
     var loginController = require('login/loginController');
     var parentController = require('login/parentController');
     var registrationController = require('login/registrationController');
-    var authenticationService = require('login/authenticationService');
     var loginConstant = require('login/loginConstant');
     var userProfileController = require('login/userProfileController');
     var forgotPasswordController = require('login/forgotPasswordController');
