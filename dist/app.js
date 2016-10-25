@@ -5,7 +5,7 @@ define('route/routes',[],function () {
             
         }
 
-        //$urlRouterProvider.otherwise("/login");
+        $urlRouterProvider.otherwise("/intro");
 
         $stateProvider
             .state('intro', {
