@@ -9,6 +9,9 @@
 
         $scope.firebaseUser = authObj.$getAuth();
 
+        var ref = firebase.database().ref();
+        var usersRef = ref.child("users");
+
         var showLoginPage = function() {
             $state.go('login');
         };
@@ -17,16 +20,6 @@
             $scope.isLoggedOut = true;
             $state.go('login');
         };
-
-        var setCurrentUser = function() {
-            $scope.currentUser = $rootScope.currentUser;
-            $scope.isUserLoggedIn = true;
-        };
-
-        var showNotAuthorized = function() {
-            console.log("Not Authorized");
-        };
-
 
         $scope.started = false;
 
@@ -73,11 +66,18 @@
         };
 
         $rootScope.$on('rootScope:userLoggedIn', function (event, data) {
-            console.log(data); // 'Emit!'
             $scope.firebaseUser = authObj.$getAuth();
+            setUserName($scope.firebaseUser.uid)
         });
 
-        $scope.currentUser = null;
+        function setUserName(uid) {
+            var query = usersRef.orderByChild("uid").equalTo(uid);
+            query.on("child_added", function (snapshot) {
+                $scope.$apply(function () {
+                    $scope.userName = snapshot.val()["firstName"] + ' ' + snapshot.val()["lastName"]
+                });
+            });
+        }
     };
 
     parentController.$inject = ['$scope', '$rootScope', '$state', '$uibModal', '$timeout', "$firebaseAuth"];
