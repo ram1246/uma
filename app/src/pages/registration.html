@@ -25,7 +25,8 @@
                                        type="text"
                                        ng-model="user.firstName"
                                        ng-required="true"
-                                       ng-minlength="2" />
+                                       ng-minlength="2" 
+                                       ng-keyup="$event.keyCode == 13 && registerUser(form, user)"/>
                                 <p class="help-block" ng-if="!submitted">Requires Minimum 2 characters</p>
                                 <label class="help-block has-error" ng-if="form.firstName.$error.required && (submitted)">First Name is required</label>
                             </div>
@@ -42,7 +43,8 @@
                                        type="text"
                                        ng-model="user.lastName"
                                        ng-required="true"
-                                       ng-minlength="2">
+                                       ng-minlength="2"
+                                       ng-keyup="$event.keyCode == 13 && registerUser(form, user)">
                                 <p class="help-block" ng-if="!submitted">Requires Minimum 2 characters</p>
                                 <label class="help-block has-error" ng-if="form.lastName.$error.required && (submitted)">Last Name is required</label>
                             </div>
@@ -54,7 +56,8 @@
                                        type="text"
                                        ng-model="user.address"
                                        ng-required="true"
-                                       ng-minlength="2">
+                                       ng-minlength="2"
+                                       ng-keyup="$event.keyCode == 13 && registerUser(form, user)">
                                 <p class="help-block" ng-if="!submitted">Requires Minimum 2 characters</p>
                                 <label class="help-block has-error" ng-if="form.lastName.$error.required && (submitted)">Last Name is required</label>
                             </div>
@@ -67,7 +70,8 @@
                                        autofocus value=""
                                        ng-model="user.username"
                                        ng-required="true"
-                                       ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/" />
+                                       ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/" 
+                                       ng-keyup="$event.keyCode == 13 && registerUser(form, user)"/>
                                 <label class="help-block" ng-if="form.email.$error.pattern && (submitted)">The Email is invalid</label>
                                 <label class="help-block has-error" ng-if="form.email.$error.required && (submitted)">Email is required</label>
                             </div>
@@ -80,7 +84,8 @@
                                        ng-required="true"
                                        ng-model="user.password"
                                        ng-minlength="3"
-                                       ng-maxlength="15" />
+                                       ng-maxlength="15" 
+                                       ng-keyup="$event.keyCode == 13 && registerUser(form, user)"/>
                                 <p class="help-block" ng-if="form.password.$error.required && (!submitted && !form.password.$dirty)">Minimum 8 characters and one special character and 1 number</p>
                                 <label class="help-block has-error" ng-show="form.password.$dirty && form.password.$error.minlength && (submitted)">Too short. Minimum 8 characters and one special character and 1 number</label>
                                 <label class="help-block has-error" ng-if="form.password.$error.pattern && (submitted)">Invalid password. Minimum 8 characters and one special character and one number </label>
@@ -95,7 +100,8 @@
                                        ng-required="true"
                                        ng-model="user.confirmPassword"
                                        ng-minlength="3"
-                                       ng-maxlength="15" />
+                                       ng-maxlength="15" 
+                                       ng-keyup="$event.keyCode == 13 && registerUser(form, user)"/>
                                 <label class="help-block has-error" ng-if="form.confirmPassword.$error.required && (submitted)">Password is required</label>
                                 <label class="help-block has-error" ng-if="(form.password.$dirty && form.confirmPassword.$dirty && (user.password === user.confirmPassword))">
                                     Password is a match(poor, good, strong)

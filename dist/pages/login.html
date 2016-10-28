@@ -17,7 +17,8 @@
                                             autofocus value=""
                                             ng-model="email"
                                             ng-required="true"
-                                            ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/" />
+                                            ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/" 
+                                            ng-keyup="$event.keyCode == 13 && validateUser(email, password)"/>
                                     <label class="help-block" ng-if="login.email.$error.pattern && (submitted)">The Email is invalid</label>
                                     <label class="help-block has-error" ng-if="login.email.$error.required && (submitted)">Email is required</label>
                                 </div>
@@ -28,7 +29,8 @@
                                             type="password"
                                             value=""
                                             ng-model="password"
-                                            ng-required="true">
+                                            ng-required="true"
+                                            ng-keyup="$event.keyCode == 13 && validateUser(email, password)">
                                     <label class="help-block" ng-if="login.password.$error.pattern || login.password.$error.required && (submitted)">Password is required</label>
                                 </div>
                                 <div class="form-group has-error" ng-show="isShowLoginError">
