@@ -83,7 +83,7 @@ p {
 .content table {width: 100%; margin-bottom: 15px;}
 .content th, .content td {border: 1px #ccc solid; padding: 2px;}
 .content blockquote {padding: 20px; font: italic 28px Georgia, serif; border-left: 4px #94B053 solid;}
-.content a {color: #94B053}
+.content a {color:darkblue}
 .content a:hover {color:#000;}
 
 /*** header ***/
@@ -115,12 +115,26 @@ p {
 }
 
 #header #nav ul li a {
-    color: #94B053;
+    color: darkblue;
     text-decoration: none;
     padding-left: 10px;
 }
 
-#header #nav ul li.active a, #header #nav ul li a:hover {color: #000;}
+#header #nav a {
+    color: darkblue;
+    text-decoration: none;
+    padding-left: 10px;
+    font-size: 14px;
+}
+
+#header #nav ul li.active a, #header #nav ul li a:hover {
+    color: #000;
+}
+
+#header #nav a:hover {
+    color: #000;
+    text-decoration: underline;
+}
 
 /*** blurb ***/
 #blurb {
@@ -228,3 +242,15 @@ img.portfolio-entry {
     .portfolio-item {margin-bottom: 20px; text-align:center;}    
     img.portfolio-entry {width: 100%;}
 }
+
+  .carousel-inner > .item > img,
+  .carousel-inner > .item > a > img {
+      margin: auto;
+  }
+  .right.carousel-control, .left.carousel-control {
+    display: none;
+}
+  .carousel-indicators li { 
+      visibility: hidden; 
+
+  }

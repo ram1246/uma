@@ -145,6 +145,7 @@ define('login/parentController',[],function() {
 
     var parentController = function ($scope, $rootScope, $state, $uibModal, $timeout, $firebaseAuth) {
 
+        var uid = "";
         $scope.isLoggedOut = false;
 
         var authObj = $firebaseAuth();
@@ -220,6 +221,8 @@ define('login/parentController',[],function() {
                 });
             });
         }
+
+        setUserName(uid);
     };
 
     parentController.$inject = ['$scope', '$rootScope', '$state', '$uibModal', '$timeout', "$firebaseAuth"];
