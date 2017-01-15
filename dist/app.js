@@ -262,21 +262,41 @@ define('login/registrationController',[],function () {
             $scope.successMessage = "Registration successful.";
         };
 
+        $scope.getPattern = function (user) {
+            if (user) {
+                return user.password && user.password.replace(/([.*+?^${}()|\[\]\/\\])/g, '\\$1');
+            }
+        }
+
         $scope.registerUser = function (form, user) {
             $scope.submitted = true;
+
+            if (!user) {
+                return;
+            }
+
+            if (user.middleName === undefined) {
+                user.middleName = "";
+            };
+
             var userToSave = {
                 firstName: user.firstName,
                 middleName: user.middleName,
                 lastName: user.lastName,
                 address: user.address,
+                city: user.city,
+                state: user.state,
+                zip: user.zip,
                 email: user.username,
                 password: user.password
             };
-            createUser(userToSave);
+
+            if (form.$valid) {
+                createUser(userToSave);
+            }
         };
 
         function createUser(user, userId) {
-            
             $scope.promise = auth.$createUserWithEmailAndPassword(user.email, user.password);
 
             $scope.promise
@@ -286,7 +306,10 @@ define('login/registrationController',[],function () {
                         firstName: user.firstName,
                         middleName: user.middleName,
                         lastName: user.lastName,
-                        address: user.address
+                        address: user.address,
+                        city: user.city,
+                        state: user.state,
+                        zip: user.zip
                     };
                     addUserDetails(additionUserDetails);
                     onUserRegistrationSuccess();
@@ -296,11 +319,11 @@ define('login/registrationController',[],function () {
                     console.log(error);
                     onUserRegistrationReject(error);
                 });
-        }
+        };
 
         function addUserDetails(additionUserDetails) {
             userData.push(additionUserDetails);
-        }
+        };
 
     };
 
@@ -333,9 +356,7 @@ define('login/userProfileController',[],function () {
 
     var userProfileController = function ($scope, $rootScope, $state, $firebaseAuth, currentAuth) {
         var auth = $firebaseAuth();
-
-        console.log(currentAuth);
-        
+               
         $scope.showEmailReset = false;
         
         $scope.sendPasswordResetEmail = function () {

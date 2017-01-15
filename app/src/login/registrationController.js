@@ -31,21 +31,41 @@
             $scope.successMessage = "Registration successful.";
         };
 
+        $scope.getPattern = function (user) {
+            if (user) {
+                return user.password && user.password.replace(/([.*+?^${}()|\[\]\/\\])/g, '\\$1');
+            }
+        }
+
         $scope.registerUser = function (form, user) {
             $scope.submitted = true;
+
+            if (!user) {
+                return;
+            }
+
+            if (user.middleName === undefined) {
+                user.middleName = "";
+            };
+
             var userToSave = {
                 firstName: user.firstName,
                 middleName: user.middleName,
                 lastName: user.lastName,
                 address: user.address,
+                city: user.city,
+                state: user.state,
+                zip: user.zip,
                 email: user.username,
                 password: user.password
             };
-            createUser(userToSave);
+
+            if (form.$valid) {
+                createUser(userToSave);
+            }
         };
 
         function createUser(user, userId) {
-            
             $scope.promise = auth.$createUserWithEmailAndPassword(user.email, user.password);
 
             $scope.promise
@@ -55,7 +75,10 @@
                         firstName: user.firstName,
                         middleName: user.middleName,
                         lastName: user.lastName,
-                        address: user.address
+                        address: user.address,
+                        city: user.city,
+                        state: user.state,
+                        zip: user.zip
                     };
                     addUserDetails(additionUserDetails);
                     onUserRegistrationSuccess();
@@ -65,11 +88,11 @@
                     console.log(error);
                     onUserRegistrationReject(error);
                 });
-        }
+        };
 
         function addUserDetails(additionUserDetails) {
             userData.push(additionUserDetails);
-        }
+        };
 
     };
 

@@ -70,7 +70,7 @@
   <ItemGroup>
     <Folder Include="app\src\assets\css\" />
     <Folder Include="app\src\assets\img\" />
-    <Folder Include="dist\src\" />
+    <Folder Include="dist\" />
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
