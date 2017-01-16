@@ -41,7 +41,12 @@ body {
     font-size: 12px;
 }
 
-h1,h2,h5,h6 { 
+h1 { 
+    font-weight: normal; 
+    margin-bottom: 15px; 
+}
+
+h2 { 
     font-weight: normal; 
     margin-bottom: 15px; 
 }
@@ -57,12 +62,15 @@ h4 {
     margin-bottom: 10px; 
 }
 
-h1,h2,h3,h4,h5,h6 { 
+h5 { 
     font-weight: normal; 
-    margin-bottom: 15px; 
+    margin-bottom: 12px; 
 }
 
-
+h6 { 
+    font-weight: normal; 
+    margin-bottom: 12px; 
+}
 
 p { 
     margin: 0 0 15px 0; 
@@ -75,7 +83,7 @@ p {
 .content h3 { font: 28px Georgia, serif; }
 .content h4 { font: 26px Georgia, serif; }
 .content h5 { font: 24px Georgia, serif; }
-.content h6 { font: 22px Georgia, serif; }
+.content h6 { font: 15px Georgia, serif; }
 .content ul, .content ol {margin-bottom: 15px;}
 .content ul {list-style: disc;}
 .content ol {list-style: decimal}

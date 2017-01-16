@@ -1,4 +1,4 @@
-﻿<div ng-controller="loginController" class="content clearfix">
+<div ng-controller="loginController" class="content clearfix">
     <div id="login">
         <div class="col-3 fl">
             <div cg-busy="{promise:promise,templateUrl:templateUrl,message:message,backdrop:backdrop,delay:delay,minDuration:minDuration}">
@@ -43,18 +43,17 @@
                                 </div>
                                 <hr />
 
-                                <div class="form-group" ng-if="false">
-                                    <label>Or, sign In using OpenID/oAuth</label>
-                                    <input class="form-control" placeholder="Enter OpenID/oAuth">
-                                    <p class="help-block">Help text goes here in any</p>
-                                </div>
-
                                 <!-- Change this to a button or input when using this as a form -->
                                 <a class="btn btn-success" ng-click="validateUser(email, password)">Login</a> 
-                                <a href="#/forgotpassword" ui-sref="forgotpassword">Forgot password</a>
                             </fieldset>
                         </form>
+                        <div>
+                            <hr />
+                            <a href="#/forgotpassword" ui-sref="forgotpassword">Forgot password</a>
+
+                        </div>
                     </div>
+                    
                     <div class="panel-footer">
                         <h5>Don't have account <a href="#/registration" ui-sref="registration">Register</a></h5>
                     </div>

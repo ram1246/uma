@@ -74,6 +74,13 @@ require.config({
             deps: ['angular'],
             'cgBusy': { exports: "cgBusy" }
         },
+        'angularTranslateLoaderStaticFiles': {
+            deps: [
+                'angular',
+                'angularTranslate'
+            ],
+            'angularTranslateLoaderStaticFiles': { exports: 'angularTranslateLoaderStaticFiles' }
+        },
         'angularBreadcrumbs': {
             deps: ['angular'],
             'angularBreadcrumbs': { exports: 'angularBreadcrumbs' }

@@ -210,7 +210,8 @@
                         'angular': 'empty:',
                         'uiRouter': 'empty:',
                         'spin': 'empty:'
-                    }
+                    },
+                    urlArgs: "bust=" + Math.random()
                 }
             }
         },
@@ -311,6 +312,14 @@
             server: {
                 path: 'http://localhost:<%= express.server.options.port %>/'
             }
+        },        
+        'cache-busting': {
+            requirejs: {
+                replace: ['dist/pages/**/*.html'],
+                replacement: '/main.js',
+                file: 'dist/main.js',
+                cleanup: true
+            }
         }
 
     });
@@ -321,7 +330,8 @@
         'html2JS',
         'requirejs',
         'usebanner:dist',
-        'clean:appRelease'
+        'clean:appRelease',
+        'cache-busting'
     ]);
 
     grunt.registerTask('buildcss', [
