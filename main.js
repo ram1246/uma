@@ -14,7 +14,7 @@ require.config({
         text: '../bower_components/requirejs-text/text',
         lodash: '../bower_components/lodash/dist/lodash.min',
         ngIdle: '../bower_components/ng-idle/angular-idle.min',
-        cgBusy: '../libs/angular-busy',
+        cgBusy: '../app/src/libs/angular-busy',
         angularBreadcrumbs: '../bower_components/angular-utils-ui-breadcrumbs/uiBreadcrumbs',
         angularInform: '../bower_components/angular-inform/dist/angular-inform.min'
     },

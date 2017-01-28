@@ -209,9 +209,10 @@
                         'route': './src/uma',
                         'angular': 'empty:',
                         'uiRouter': 'empty:',
-                        'spin': 'empty:'
+                        'spin': 'empty:',
+                        'angular-busy': 'empty:'
                     },
-                    urlArgs: "bust=" + Math.random()
+                    urlArgs: 'v=1'
                 }
             }
         },
@@ -222,7 +223,7 @@
                 },
                 files: {
                     src: [
-                        '<%= distDirectory%>/src/*.js'
+                        '<%= distDirectory%>/*.js'
                     ]
                 }
             },
@@ -232,7 +233,7 @@
                 },
                 files: {
                     src: [
-                        '<%= cssDirectory %>/*.css'
+                        '<%= distDirectory %>/css/*.css'
                     ]
                 }
             }
@@ -312,26 +313,16 @@
             server: {
                 path: 'http://localhost:<%= express.server.options.port %>/'
             }
-        },        
-        'cache-busting': {
-            requirejs: {
-                replace: ['dist/pages/**/*.html'],
-                replacement: '/main.js',
-                file: 'dist/main.js',
-                cleanup: true
-            }
         }
-
     });
 
     grunt.registerTask('release', [
-        'buildcss',
         'copyfiles',
         'html2JS',
         'requirejs',
         'usebanner:dist',
-        'clean:appRelease',
-        'cache-busting'
+        'usebanner:css',
+        'clean:appRelease'
     ]);
 
     grunt.registerTask('buildcss', [

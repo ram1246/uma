@@ -1,9 +1,9 @@
-<div class="wrap">
+﻿<div class="wrap">
     <div class="content clearfix">
         <div class="col-3 fl">
             <div>
                 <h3>Donate through PayPal</h3>
-                
+
                 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
                     <input type="hidden" name="cmd" value="_s-xclick">
                     <input type="hidden" name="hosted_button_id" value="LNED3ZJN95KEN">
@@ -12,7 +12,7 @@
                 </form>
 
             </div>
-            <hr/>
+            <hr />
             <div>
                 <h3>Donate through Person-to-Person Payments</h3>
                 <p>Donation can be made using Person-to-Person Payments method to below email account</p>
@@ -26,5 +26,54 @@
                 </p>
             </div>
         </div>
-    </div>       
+        <div class="col-1 fr">
+            ADVERTISEMENT
+
+            <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="5000">
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                    <li data-target="#myCarousel" data-slide-to="3"></li>
+                </ol>
+
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner" role="listbox">
+                    <div class="item active">
+                        <a href="https://www.amazon.com" target="_blank"><img src="../img/ad1.png" alt="Chania"></a>
+                    </div>
+
+                    <div class="item">
+                        <a href="https://www.amazon.com" target="_blank"><img src="../img/ad2.jpg" alt="Chania"></a>
+                    </div>
+
+                    <div class="item">
+                        <a href="https://www.amazon.com" target="_blank"><img src="../img/ad3.png" alt="Flower"></a>
+                    </div>
+
+                    <div class="item">
+                        <a href="https://www.amazon.com" target="_blank"><img src="../img/ad4.jpg" alt="Flower"></a>
+                    </div>
+                </div>
+
+                <!-- Left and right controls -->
+                <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+
+        </div>
+    </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $('#myCarousel').carousel();
+    });
+</script>

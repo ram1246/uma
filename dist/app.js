@@ -1,3 +1,6 @@
+/**
+ * uma.ui - 2017/01/18 00:10:17 UTC
+*/
 define('route/routes',[],function () {
     var routes = function ($stateProvider, $urlRouterProvider) {
 

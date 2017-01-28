@@ -61,15 +61,13 @@
     <Content Include="server.js" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app\src\less\mixins.less" />
-    <None Include="app\src\less\uma_main.less" />
-    <None Include="app\src\less\variables.less" />
     <None Include="bower.json" />
     <None Include="package.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="app\src\assets\css\" />
     <Folder Include="app\src\assets\img\" />
+    <Folder Include="app\src\less\" />
     <Folder Include="dist\" />
     <Folder Include="Properties\" />
   </ItemGroup>
