@@ -33,12 +33,9 @@
     <Content Include="app\src\app.js" />
     <Content Include="app\src\config\config.js" />
     <Content Include="app\src\libs\angular-busy.js" />
-    <Content Include="app\src\login\forgotPasswordController.js" />
-    <Content Include="app\src\login\loginConstant.js" />
     <Content Include="app\src\login\loginController.js" />
     <Content Include="app\src\login\parentController.js" />
     <Content Include="app\src\login\registrationController.js" />
-    <Content Include="app\src\login\userProfileController.js" />
     <Content Include="app\src\pages\about.html" />
     <Content Include="app\src\pages\contactus.html" />
     <Content Include="app\src\pages\donate.html" />
@@ -52,7 +49,6 @@
     <Content Include="app\src\pages\registration.html" />
     <Content Include="app\src\pages\upcomingevents.html" />
     <Content Include="app\src\pages\userprofile.html" />
-    <Content Include="app\src\services\validatorService.js" />
     <Content Include="app\src\umaMain.js" />
     <Content Include="app\src\routes.js" />
     <Content Include="Gruntfile.js" />
@@ -67,7 +63,6 @@
   <ItemGroup>
     <Folder Include="app\src\assets\css\" />
     <Folder Include="app\src\assets\img\" />
-    <Folder Include="app\src\less\" />
     <Folder Include="dist\" />
     <Folder Include="Properties\" />
   </ItemGroup>

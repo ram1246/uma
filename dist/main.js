@@ -1,5 +1,5 @@
 /**
- * uma.ui - 2017/01/18 00:10:17 UTC
+ * uma.ui - 2017/01/29 18:44:30 UTC
 */
 
 require.config({
@@ -17,7 +17,7 @@ require.config({
         text: '../bower_components/requirejs-text/text',
         lodash: '../bower_components/lodash/dist/lodash.min',
         ngIdle: '../bower_components/ng-idle/angular-idle.min',
-        cgBusy: '../app/src/libs/angular-busy',
+        cgBusy: '/libs/angular-busy',
         angularBreadcrumbs: '../bower_components/angular-utils-ui-breadcrumbs/uiBreadcrumbs',
         angularInform: '../bower_components/angular-inform/dist/angular-inform.min'
     },

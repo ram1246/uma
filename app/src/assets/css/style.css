@@ -256,3 +256,8 @@ img.portfolio-entry {
       visibility: hidden; 
 
   }
+
+  th {
+    background-color:cornflowerblue;
+    color: black;
+} 

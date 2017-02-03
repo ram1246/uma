@@ -1,5 +1,5 @@
 /**
- * uma.ui - 2017/01/18 00:10:17 UTC
+ * uma.ui - 2017/01/29 18:44:30 UTC
 */
 define('route/routes',[],function () {
     var routes = function ($stateProvider, $urlRouterProvider) {
@@ -334,89 +334,7 @@ define('login/registrationController',[],function () {
 
     return registrationController;
 });
-define('login/loginConstant',[],function() {
-    return {
-        "USER_ROLES": {
-            all: '*',
-            admin: 'admin',
-            editor: 'editor',
-            guest: 'guest',
-            contributor: 'Contributor',
-            initial: 'initial'
-        },
-        "AUTH_EVENTS": {
-            loginSuccess: 'auth-login-success',
-            loginFailed: 'auth-login-failed',
-            logoutSuccess: 'auth-logout-success',
-            sessionTimeout: 'auth-session-timeout',
-            notAuthenticated: 'auth-not-authenticated',
-            notAuthorized: 'auth-not-authorized'
-        }
-    };
-});
-define('login/userProfileController',[],function () {
-    'use strict';
-
-    var userProfileController = function ($scope, $rootScope, $state, $firebaseAuth, currentAuth) {
-        var auth = $firebaseAuth();
-               
-        $scope.showEmailReset = false;
-        
-        $scope.sendPasswordResetEmail = function () {
-            auth.$sendPasswordResetEmail(currentAuth.email).then(function () {
-                console.log("Password reset email sent successfully!");
-                $scope.successMessage = "Password reset email sent successfully!";
-                $scope.showMessageRegistration = true;
-            }).catch(function (error) {
-                console.error("Error: ", error);
-                $scope.successMessage = "Error while sending password reset email, Please try again later";
-            });
-        };
-    };
-
-    userProfileController.$inject = ["$scope", "$rootScope", "$state", "$firebaseAuth", "currentAuth"];
-
-    return userProfileController;
-});
-define('login/forgotPasswordController',[],function () {
-    'use strict';
-
-    var forgotPasswordController = function ($scope, $firebaseAuth) {
-
-        var auth = $firebaseAuth();
-
-        $scope.delay = 0;
-        $scope.minDuration = 0;
-        $scope.message = 'Loging in...';
-        $scope.backdrop = true;
-        $scope.promise = null;
-
-        $scope.submitted = false;
-
-        $scope.email = 'ss.varn@gmail.com';
-
-        $scope.sendPasswordResetEmail = function () {
-            $scope.submitted = true;
-
-            if ($scope.forgotpassword.email.$valid) {
-
-                $scope.promise = auth.$sendPasswordResetEmail($scope.email);
-
-                $scope.promise.then(function () {
-                    $scope.successMessage = "Password reset email sent successfully!";
-                    $scope.showMessageRegistration = true;
-                }).catch(function (error) {
-                    $scope.successMessage = "Error while sending password reset email, Please try again later";
-                });
-            }
-        };
-    };
-
-    forgotPasswordController.$inject = ['$scope', '$firebaseAuth'];
-
-    return forgotPasswordController;
-});
-define('app',['require','angular','route/routes','login/loginController','login/parentController','login/registrationController','login/loginConstant','login/userProfileController','login/forgotPasswordController'],function (require) {
+define('app',['require','angular','route/routes','login/loginController','login/parentController','login/registrationController'],function (require) {
     'use strict';
 
     var angular = require('angular');
@@ -425,9 +343,6 @@ define('app',['require','angular','route/routes','login/loginController','login/
     var loginController = require('login/loginController');
     var parentController = require('login/parentController');
     var registrationController = require('login/registrationController');
-    var loginConstant = require('login/loginConstant');
-    var userProfileController = require('login/userProfileController');
-    var forgotPasswordController = require('login/forgotPasswordController');
 
 
     var app = angular.module('myApp', ["ui.router", "inform", "ngIdle", "cgBusy", "firebase", "ui.bootstrap" ]);
@@ -442,8 +357,6 @@ define('app',['require','angular','route/routes','login/loginController','login/
         .controller('ParentController', parentController)
         .controller('loginController', loginController)
         .controller('registrationController', registrationController)
-        .controller('userProfileController', userProfileController)
-        .controller('forgotPasswordController', forgotPasswordController)
         
         .run(function ($rootScope, $state) {
             $rootScope.$on("$stateChangeError", function (event, toState, toParams, fromState, fromParams, error) {

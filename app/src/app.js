@@ -7,9 +7,6 @@
     var loginController = require('login/loginController');
     var parentController = require('login/parentController');
     var registrationController = require('login/registrationController');
-    var loginConstant = require('login/loginConstant');
-    var userProfileController = require('login/userProfileController');
-    var forgotPasswordController = require('login/forgotPasswordController');
 
 
     var app = angular.module('myApp', ["ui.router", "inform", "ngIdle", "cgBusy", "firebase", "ui.bootstrap" ]);
@@ -24,8 +21,6 @@
         .controller('ParentController', parentController)
         .controller('loginController', loginController)
         .controller('registrationController', registrationController)
-        .controller('userProfileController', userProfileController)
-        .controller('forgotPasswordController', forgotPasswordController)
         
         .run(function ($rootScope, $state) {
             $rootScope.$on("$stateChangeError", function (event, toState, toParams, fromState, fromParams, error) {
