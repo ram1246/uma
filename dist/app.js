@@ -1,5 +1,5 @@
 /**
- * uma.ui - 2017/01/29 18:44:30 UTC
+ * uma.ui - 2017/02/08 02:17:36 UTC
 */
 define('route/routes',[],function () {
     var routes = function ($stateProvider, $urlRouterProvider) {
@@ -13,7 +13,7 @@ define('route/routes',[],function () {
         $stateProvider
             .state('intro', {
                 url: "/intro",
-                templateUrl: "intro.html",
+                templateUrl: "home.html",
                 resolve: resolveControllerDataByRoute("login"),
                 data: {}
             })

@@ -10,7 +10,7 @@
         $stateProvider
             .state('intro', {
                 url: "/intro",
-                templateUrl: "intro.html",
+                templateUrl: "home.html",
                 resolve: resolveControllerDataByRoute("login"),
                 data: {}
             })
