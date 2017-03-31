@@ -1,7 +1,23 @@
 ﻿<div class="content clearfix">
     <div class="col-3 fl">
-        <h2>Past Events</h2>
-        
+        <h2>Diwali 2016</h2>
+        <div>
+            <p>
+                Uttarakhand Samaj of Greater Chicago Successful Diwali Event 2016
+            </p>
+        </div>
+        <div class="w3-content w3-section" style="max-width:700px">
+            <a href="https://www.facebook.com/pg/usogc/photos/?tab=album&album_id=1361273740550712" target="_blank"><img class="mySlides" src="../img/1.jpg" style="width:100%"></a>
+            <a href="https://www.facebook.com/pg/usogc/photos/?tab=album&album_id=1361273740550712" target="_blank"><img class="mySlides" src="../img/2.jpg" style="width:100%"></a>
+            <a href="https://www.facebook.com/pg/usogc/photos/?tab=album&album_id=1361273740550712" target="_blank"><img class="mySlides" src="../img/3.jpg" style="width:100%"></a>
+            <a href="https://www.facebook.com/pg/usogc/photos/?tab=album&album_id=1361273740550712" target="_blank"><img class="mySlides" src="../img/4.jpg" style="width:100%"></a>
+            <a href="https://www.facebook.com/pg/usogc/photos/?tab=album&album_id=1361273740550712" target="_blank"><img class="mySlides" src="../img/5.jpg" style="width:100%"></a>
+            <a href="https://www.facebook.com/pg/usogc/photos/?tab=album&album_id=1361273740550712" target="_blank"><img class="mySlides" src="../img/6.jpg" style="width:100%"></a>
+            <a href="https://www.facebook.com/pg/usogc/photos/?tab=album&album_id=1361273740550712" target="_blank"><img class="mySlides" src="../img/7.jpg" style="width:100%"></a>
+            <a href="https://www.facebook.com/pg/usogc/photos/?tab=album&album_id=1361273740550712" target="_blank"><img class="mySlides" src="../img/8.jpg" style="width:100%"></a>
+            <a href="https://www.facebook.com/pg/usogc/photos/?tab=album&album_id=1361273740550712" target="_blank"><img class="mySlides" src="../img/9.jpg" style="width:100%"></a>
+            <a href="https://www.facebook.com/pg/usogc/photos/?tab=album&album_id=1361273740550712" target="_blank"><img class="mySlides" src="../img/10.jpg" style="width:100%"></a>
+        </div>
     </div>
 
     <div class="col-1 fr">
@@ -33,6 +49,9 @@
                 <div class="item">
                     <a href="http://www.maharajafarm.com/" target="_blank"><img src="../img/ad4.png" alt="Flower"></a>
                 </div>
+                <div class="item">
+                    <a href="http://www.meghnajewels.com/" target="_blank"><img src="../img/ad5.png" alt="Flower"></a>
+                </div>
             </div>
 
             <!-- Left and right controls -->
@@ -52,4 +71,21 @@
     $(document).ready(function () {
         $('#myCarousel').carousel();
     });
+</script>
+
+<script>
+var myIndex = 0;
+carousel();
+
+function carousel() {
+    var i;
+    var x = document.getElementsByClassName("mySlides");
+    for (i = 0; i < x.length; i++) {
+       x[i].style.display = "none";
+    }
+    myIndex++;
+    if (myIndex > x.length) {myIndex = 1}
+    x[myIndex-1].style.display = "block";
+    setTimeout(carousel, 5000); // Change image every 2 seconds
+}
 </script>
